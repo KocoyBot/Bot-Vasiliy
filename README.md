@@ -38,4 +38,4 @@ requirements.txt - список зависимостей
 
 speechkit.py - файл, для работы с Yandex Speechkit
 
-yandex_gpt.py - фалй, для работы с Yandex GPT
+yandex_gpt.py - файл, для работы с Yandex GPT
