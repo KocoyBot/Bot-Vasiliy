@@ -93,7 +93,7 @@ def messaging(message):
             bot.send_message(message.chat.id, speechkit.speech_to_text(bot.download_file(bot.get_file(message.voice.file_id).file_path))[1])
             return
         
-        db.set_query(f"UPDATE `users` SET `blocks` = '" + str(db.select_data(f"SELECT `blocks` FROM `users` WHERE `user_id` = '{message.from_user.id}'")[0] - math.ceil(message.voice.duration / config.MAX_DURATION)) + f"' WHERE `user_id` = '{message.from_user.id}'")
+        db.set_query(f"UPDATE `users` SET `blocks` = '" + str(db.select_data(f"SELECT `blocks` FROM `users` WHERE `user_id` = '{message.from_user.id}'")[0] - math.ceil(message.voice.duration / 15)) + f"' WHERE `user_id` = '{message.from_user.id}'")
 
         db.set_query(f"INSERT INTO `messages` (`user_id`, `role`, `content`) VALUES ('{message.from_user.id}', 'system', '" + json.dumps({'role': 'system', 'text': f'{config.system_prompt[1]}'}, ensure_ascii=False) + "')")
 
@@ -160,7 +160,7 @@ def writing_post(message):
             bot.send_message(message.chat.id, speechkit.speech_to_text(bot.download_file(bot.get_file(message.voice.file_id).file_path))[1], reply_markup=create_buttons('/chat', '/post', '/help', '/buy', '/values_valutes', '/debug'))
             return
 
-        db.set_query(f"UPDATE `users` SET `blocks` = '" + str(db.select_data(f"SELECT `blocks` FROM `users` WHERE `user_id` = '{message.from_user.id}'")[0] - math.ceil(message.voice.duration / config.MAX_DURATION)) + f"' WHERE `user_id` = '{message.from_user.id}'")
+        db.set_query(f"UPDATE `users` SET `blocks` = '" + str(db.select_data(f"SELECT `blocks` FROM `users` WHERE `user_id` = '{message.from_user.id}'")[0] - math.ceil(message.voice.duration / 15)) + f"' WHERE `user_id` = '{message.from_user.id}'")
 
         db.set_query(f"INSERT INTO `messages` (`user_id`, `role`, `content`) VALUES ('{message.from_user.id}', 'system', '" + json.dumps({'role': 'system', 'text': f'{config.system_prompt[0]}'}, ensure_ascii=False) + "')")
 
