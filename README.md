@@ -1,8 +1,11 @@
 Бот Василий от Егора. Финальный проект для курса в котором я учусь.
 
+
 Бот представляет собой общение с GPT и написание постов, с помощью GPT всё при помощи голоса.
 
+
 Ссылка на бота: https://t.me/bekrenev_vasyliy_bot
+
 
 Команды:
 
@@ -20,9 +23,12 @@
 
 /debug - логи
 
+
 Написан на Python, используя библиотеку PyTelegramBotAPI.
 
+
 В проекте используются API: Telegram, Yandex GPT Pro и Yandex SpeechKit (Yandex Cloud).
+
 
 bot.py - файл бота
 
