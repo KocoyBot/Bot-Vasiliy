@@ -84,7 +84,7 @@ def messaging(message):
             bot.register_next_step_handler(message, messaging)
             return
         
-        if message.voice.duration > config.MAX_DURATION:
+        if message.voice.duration >= config.MAX_DURATION:
             bot.send_message(message.chat.id, f"Ваше аудио сообщение дольше 30 секунд, максимальная продолжительность аудио сообщения 30 секунд. Запишите аудио короче или же  секунд")
             bot.register_next_step_handler(message, messaging)
             return
@@ -151,7 +151,7 @@ def writing_post(message):
             bot.register_next_step_handler(message, writing_post)
             return
         
-        if message.voice.duration > config.MAX_DURATION:
+        if message.voice.duration >= config.MAX_DURATION:
             bot.send_message(message.chat.id, f"Ваше аудио сообщение дольше 30 секунд, максимальная продолжительность аудио сообщения 30 секунд. Запишите аудио короче или же  секунд", reply_markup=create_buttons('Выйти из режима написания поста'))
             bot.register_next_step_handler(message, messaging)
             return
@@ -187,7 +187,7 @@ def writing_post(message):
 @bot.message_handler(commands=['debug'])
 def debug(message):
     try:
-        with open('logs.txt', 'r') as f:
+        with open(config.LOGS, 'r') as f:
             bot.send_document(message.chat.id, f, reply_markup=create_buttons('/chat', '/post', '/help', '/buy', '/values_valutes', '/debug'))
     except Exception as e:
         logging.error(e)

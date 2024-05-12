@@ -1,8 +1,9 @@
 TOKEN = '' # Токен бота
 folder_id = '' # ID каталога
-api_key = '' # API ключ, вместо IAM токена, чтобы не писать функцию для смены IAM токена
-db_name = 'data_base.db' # Имя базы данных
-LOGS = 'logs.txt' # Файл логов
+api_key = '' # API ключ, вместо IAM токена, чтобы не писать функцию для сметы IAM токена
+PATH = '/home/имя_пользователя/Bot-Vasiliy' # Путь к папке проекта
+db_name = f'{PATH}/data_base.db' # Имя базы данных
+LOGS = f'{PATH}/logs.txt' # Файл логов
 
 MAX_TOKENS_FOR_USER = 15000
 MAX_SYMBOLS_FOR_USERS = 10000
