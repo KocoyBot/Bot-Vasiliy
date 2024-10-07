@@ -166,9 +166,9 @@ def writing_post(message):
 
         db.set_query(f"INSERT INTO `messages` (`user_id`, `type`, `role`, `content`) VALUES ('{message.from_user.id}', 'post', 'user', '" + json.dumps({'role': 'user', 'text': f'{speechkit.speech_to_text(bot.download_file(bot.get_file(message.voice.file_id).file_path))[1]}'}, ensure_ascii=False) + "')")
 
-        db.set_query(f"INSERT INTO `messages` (`user_id`, `type`, `role`, `content`) VALUES ('{message.from_user.id}', 'post', 'assistant', '" + json.dumps({'role': 'assistant', 'text': yandex_gpt.gpt(list(json.loads(i) for i in db.select_data(f"SELECT `content` FROM `messages` WHERE `user_id` = '{message.from_user.id}'")))}, ensure_ascii=False) + "')")
+        db.set_query(f"INSERT INTO `messages` (`user_id`, `type`, `role`, `content`) VALUES ('{message.from_user.id}', 'post', 'assistant', '" + json.dumps({'role': 'assistant', 'text': yandex_gpt.gpt(list(json.loads(i) for i in db.select_data(f"SELECT `content` FROM `messages` WHERE `user_id` = '{message.from_user.id}' AND `type` = 'post'")))}, ensure_ascii=False) + "')")
 
-        db.set_query(f"UPDATE `users` SET `tokens` = '" + str(db.select_data(f"SELECT `tokens` FROM `users` WHERE `user_id` = '{message.from_user.id}'")[0] - yandex_gpt.count_tokens(list(json.loads(i) for i in db.select_data(f"SELECT `content` FROM `messages` WHERE `user_id` = '{message.from_user.id}'")))) + f"' WHERE `user_id` = '{message.from_user.id}'")
+        db.set_query(f"UPDATE `users` SET `tokens` = '" + str(db.select_data(f"SELECT `tokens` FROM `users` WHERE `user_id` = '{message.from_user.id}'")[0] - yandex_gpt.count_tokens(list(json.loads(i) for i in db.select_data(f"SELECT `content` FROM `messages` WHERE `user_id` = '{message.from_user.id}' AND `type` = 'post'")))) + f"' WHERE `user_id` = '{message.from_user.id}'")
 
         for i in list(json.loads(i) for i in db.select_data(f"SELECT `content` FROM `messages` WHERE `user_id` = '{message.from_user.id}' AND `role` = 'assistant' ORDER BY `id` DESC LIMIT 1")):
             text = i['text']
