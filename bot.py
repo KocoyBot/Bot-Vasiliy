@@ -173,7 +173,7 @@ def writing_post(message):
         for i in list(json.loads(i) for i in db.select_data(f"SELECT `content` FROM `messages` WHERE `user_id` = '{message.from_user.id}' AND `role` = 'assistant' ORDER BY `id` DESC LIMIT 1")):
             text = i['text']
 
-        db.set_query(f"DELETE FROM `message` WHERE `user_id` = '{message.from_user.id}' AND `type` = 'post'")
+        db.set_query(f"DELETE FROM `messages` WHERE `user_id` = '{message.from_user.id}' AND `type` = 'post'")
 
         db.set_query(f"INSERT INTO `posts` (`user_id`, `text`) VALUES ('{message.from_user.id}', '{text}')")
 
